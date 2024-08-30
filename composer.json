@@ -1,0 +1,41 @@
+{
+    "name": "plutuss/here-coding-geo",
+    "description": "",
+    "keywords": [
+        "laravel",
+        "api",
+        "geolocation",
+        "geocoding",
+        "geography",
+        "location",
+        "coordinates",
+        "places",
+        "cities",
+        "countries"
+    ],
+    "minimum-stability": "stable",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "plutuss",
+            "email": "dima92konovalenko@gmail.com",
+            "homepage": "https://github.com/plutuss"
+        }
+    ],
+    "require": {
+        "php": "^8.0|^8.1|^8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Plutuss\\HerePlatform\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Plutuss\\HerePlatform\\Providers\\GeoCodingServiceProvider"
+            ]
+        }
+    }
+}
