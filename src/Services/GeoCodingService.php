@@ -35,8 +35,10 @@ class GeoCodingService implements GeoCodingInterface
         string|int $houseNumber = null,
         string $lang = null
     ): Collection {
+
         return (new GeocodeSearchService)
             ->search($city, $street, $houseNumber, $lang);
+
     }
 
     /**
@@ -49,7 +51,9 @@ class GeoCodingService implements GeoCodingInterface
         float|int $latitude,
         float|int $longitude,
         float|int $radius = 10
+
     ): Collection {
+
         return (new ReverseService)
             ->reverseGeocode($latitude, $longitude, $radius);
     }
@@ -67,6 +71,7 @@ class GeoCodingService implements GeoCodingInterface
     ): Collection {
         return (new DiscoverService)
             ->discover($latitude, $longitude, $search);
+
     }
 
     /**
@@ -80,6 +85,7 @@ class GeoCodingService implements GeoCodingInterface
     ): Collection {
         return (new AutocompleteService)
             ->autocomplete($search, $limit);
+
     }
 
 }

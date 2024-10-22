@@ -16,10 +16,14 @@ class DiscoverService extends GeoCodingClientApi
      */
     public function discover(float $latitude, float $longitude, string $search): Collection
     {
-        return $this->setOption([
-            'at' => $latitude . ',' . $longitude,
-            'q' => $search
-        ])
+        return $this->setOption(
+            array_merge(
+                [
+                    'at' => $latitude . ',' . $longitude,
+                    'q' => $search
+                ],
+                $this->params
+            ))
             ->discoverUrl()
             ->sendGet();
     }

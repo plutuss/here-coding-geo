@@ -3,17 +3,15 @@
 namespace Plutuss\HerePlatform\Response;
 
 use Illuminate\Support\Collection;
+use Plutuss\HerePlatform\Contracts\Response\GeoCodingResponseInterface;
 
-class GeoCodingResponse
+class GeoCodingResponse implements GeoCodingResponseInterface
 {
 
     public function __construct(
         protected ?Collection $collection
-    )
-    {
+    ) {
         //
-
-
     }
 
     public function __get(string $name)
@@ -35,7 +33,7 @@ class GeoCodingResponse
      * @param string $key
      * @return bool
      */
-    private function hasData(string $key): bool
+    public function hasData(string $key): bool
     {
         return $this->collection->has($key);
     }

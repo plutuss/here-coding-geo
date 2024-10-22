@@ -2,9 +2,11 @@
 
 namespace Plutuss\HerePlatform\Clients;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Plutuss\HerePlatform\Response\GeoCodingResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Plutuss\HerePlatform\Contracts\Response\GeoCodingResponseInterface;
 
 class GeoCodingClientApi
 {
@@ -78,7 +80,7 @@ class GeoCodingClientApi
         return $this;
     }
 
-    public function sendGet()
+    public function sendGet(): GeoCodingResponseInterface|HttpException|Collection
     {
 
         try {
@@ -123,14 +125,16 @@ class GeoCodingClientApi
         return trim(config('here-platform.urls.' . $key));
     }
 
-    private function getResponse(int $status, mixed $data)
+    private function getResponse(int $status, mixed $data): GeoCodingResponseInterface|HttpException|Collection
     {
-
         if ($status == 200) {
-            return collect($data['items']);
-            // return collect($data['items'])->map(function ($item) {
-            //     return new GeoCodingResponse(collect($item));
-            // });
+            if (count($data['items']) > 0)
+                return collect(value: $data['items'])->map(function ($item): GeoCodingResponseInterface {
+                    return new GeoCodingResponse(collect($item));
+                });
+
+            return new GeoCodingResponse(collect([]));
+
         }
 
         throw new HttpException($status, $data['title']);

@@ -11,10 +11,8 @@ class GeoCodingServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        $this->app->singleton('geo.coding.app', GeoCodingInterface::class);
 
-        $this->app->singleton(GeoCodingInterface::class, function ($app) {
-
+        $this->app->singleton(GeoCodingInterface::class, function ($app): GeoCodingInterface {
             return GeoCodingService::getInstance();
         });
     }
@@ -24,9 +22,9 @@ class GeoCodingServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //        $this->publishes([
-//            __DIR__ . '/../config/geo-names.php' => config_path('geo-names.php'),
-//        ]);
+        $this->publishes([
+            __DIR__ . '/../config/here-platform.php' => config_path('here-platform.php'),
+        ]);
     }
 
 }

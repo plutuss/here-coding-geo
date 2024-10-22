@@ -16,10 +16,14 @@ class ReverseService extends GeoCodingClientApi
      */
     public function reverseGeocode(float $latitude, float $longitude, float|int $radius = 10)
     {
-        return $this->setOption([
-            'prox' => $latitude . ',' . $longitude . ',' . $radius,
-            'mode' => "retrieveAddresses",
-        ])
+        return $this->setOption(
+            array_merge(
+                [
+                    'prox' => $latitude . ',' . $longitude . ',' . $radius,
+                    'mode' => "retrieveAddresses",
+                ],
+                $this->params
+            ))
             ->reverseGeocodeUrl()
             ->sendGet();
     }

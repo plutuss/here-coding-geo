@@ -13,7 +13,12 @@ interface GeoCodingInterface
      * @param string|null $lang
      * @return Collection
      */
-    public function geocodeSearch(string $city, string $street = null, string|int $houseNumber = null, string $lang = null): Collection;
+    public function geocodeSearch(
+        string $city,
+        string $street = null,
+        string|int $houseNumber = null,
+        string $lang = null
+    ): Collection;
 
     /**
      * @param float|int $latitude
@@ -30,5 +35,9 @@ interface GeoCodingInterface
      * @return Collection
      */
     public function discover(float|int $latitude, float|int $longitude, string $search): Collection;
+
+
+
+    public function autocomplete(string $search, int $limit = null): Collection;
 
 }

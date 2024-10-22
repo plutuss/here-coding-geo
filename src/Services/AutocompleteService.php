@@ -8,7 +8,7 @@ use Plutuss\HerePlatform\Clients\GeoCodingClientApi;
 class AutocompleteService extends GeoCodingClientApi
 {
 
-    private $limit;
+    private int $limit;
 
     public function __construct()
     {
@@ -32,10 +32,14 @@ class AutocompleteService extends GeoCodingClientApi
      */
     public function autocomplete(string $search, int $limit = null): \Illuminate\Support\Collection
     {
-        return $this->setOption([
-            'q' => $search,
-            'limit' => $limit ?? $this->getLimit()
-        ])
+        return $this->setOption(
+            array_merge(
+                [
+                    'q' => $search,
+                    'limit' => $limit ?? $this->getLimit()
+                ],
+                $this->params
+            ))
             ->autocompleteUrl()
             ->sendGet();
     }

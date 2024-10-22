@@ -7,7 +7,7 @@ use Plutuss\HerePlatform\Clients\GeoCodingClientApi;
 class GeocodeSearchService extends GeoCodingClientApi
 {
 
-    private $lang;
+    private string $lang;
 
     public function __construct()
     {
@@ -22,10 +22,14 @@ class GeocodeSearchService extends GeoCodingClientApi
         string     $lang = null
     )
     {
-        return $this->setOption([
-            'q' => $city . ' ' . $street . ' ' . $houseNumber,
-            'lang' => $lang ?? $this->getLang()
-        ])
+
+        return $this->setOption(array_merge(
+            [
+                'q' => $city . ' ' . $street . ' ' . $houseNumber,
+                'lang' => $lang ?? $this->getLang()
+            ],
+            $this->params
+        ))
             ->geocodeSearchUrl()
             ->sendGet();
     }
