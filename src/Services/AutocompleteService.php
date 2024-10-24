@@ -20,7 +20,7 @@ class AutocompleteService extends GeoCodingClientApi
     /**
      * @return mixed
      */
-    public function getLimit()
+    public function getLimit(): mixed
     {
         return $this->limit;
     }
@@ -28,9 +28,9 @@ class AutocompleteService extends GeoCodingClientApi
     /**
      * @param string $search
      * @param int|null $limit
-     * @return Collection
+     * @return array
      */
-    public function autocomplete(string $search, int $limit = null): \Illuminate\Support\Collection
+    public function autocomplete(string $search, int $limit = null): array
     {
         return $this->setOption(
             array_merge(

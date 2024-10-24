@@ -2,6 +2,7 @@
 
 namespace Plutuss\HerePlatform\Facades;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Facade;
 use Plutuss\HerePlatform\Contracts\Services\GeoCodingInterface;
 

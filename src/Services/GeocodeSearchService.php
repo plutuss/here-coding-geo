@@ -15,12 +15,19 @@ class GeocodeSearchService extends GeoCodingClientApi
         $this->lang = config('here-platform.options.lang');
     }
 
+    /**
+     * @param string $city
+     * @param string|null $street
+     * @param string|int|null $houseNumber
+     * @param string|null $lang
+     * @return array
+     */
     public function search(
         string     $city,
         string     $street = null,
         string|int $houseNumber = null,
         string     $lang = null
-    )
+    ): array
     {
 
         return $this->setOption(array_merge(
@@ -37,7 +44,7 @@ class GeocodeSearchService extends GeoCodingClientApi
     /**
      * @return mixed
      */
-    public function getLang()
+    public function getLang(): mixed
     {
         return $this->lang;
     }

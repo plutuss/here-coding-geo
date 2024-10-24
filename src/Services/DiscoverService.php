@@ -12,9 +12,9 @@ class DiscoverService extends GeoCodingClientApi
      * @param float $latitude
      * @param float $longitude
      * @param string $search
-     * @return Collection
+     * @return array
      */
-    public function discover(float $latitude, float $longitude, string $search): Collection
+    public function discover(float $latitude, float $longitude, string $search): array
     {
         return $this->setOption(
             array_merge(

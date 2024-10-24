@@ -12,9 +12,9 @@ class ReverseService extends GeoCodingClientApi
      * @param float $latitude
      * @param float $longitude
      * @param float|int $radius
-     * @return Collection
+     * @return array
      */
-    public function reverseGeocode(float $latitude, float $longitude, float|int $radius = 10)
+    public function reverseGeocode(float $latitude, float $longitude, float|int $radius = 10): array
     {
         return $this->setOption(
             array_merge(

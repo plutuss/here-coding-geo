@@ -4,9 +4,16 @@ namespace Plutuss\HerePlatform\Response;
 
 use Illuminate\Support\Collection;
 use Plutuss\HerePlatform\Contracts\Response\GeoCodingResponseInterface;
+use Plutuss\HerePlatform\Contracts\Response\HasParameterInterface;
+use Plutuss\HerePlatform\Traits\HasParameter;
 
-class GeoCodingResponse implements GeoCodingResponseInterface
+/**
+ * @method string title()
+ */
+class GeoCodingResponse implements GeoCodingResponseInterface, HasParameterInterface
 {
+
+    use HasParameter;
 
     public function __construct(
         protected ?Collection $collection

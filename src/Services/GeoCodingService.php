@@ -27,14 +27,14 @@ class GeoCodingService implements GeoCodingInterface
      * @param string|null $street
      * @param string|int|null $houseNumber
      * @param string|null $lang
-     * @return Collection
+     * @return array
      */
     public function geocodeSearch(
         string $city,
         string $street = null,
         string|int $houseNumber = null,
         string $lang = null
-    ): Collection {
+    ): array {
 
         return (new GeocodeSearchService)
             ->search($city, $street, $houseNumber, $lang);
@@ -45,14 +45,14 @@ class GeoCodingService implements GeoCodingInterface
      * @param float|int $latitude
      * @param float|int $longitude
      * @param float|int $radius
-     * @return Collection
+     * @return array
      */
     public function reverse(
         float|int $latitude,
         float|int $longitude,
         float|int $radius = 10
 
-    ): Collection {
+    ): array {
 
         return (new ReverseService)
             ->reverseGeocode($latitude, $longitude, $radius);
@@ -62,13 +62,13 @@ class GeoCodingService implements GeoCodingInterface
      * @param float|int $latitude
      * @param float|int $longitude
      * @param string $search
-     * @return Collection
+     * @return array
      */
     public function discover(
         float|int $latitude,
         float|int $longitude,
         string $search
-    ): Collection {
+    ): array {
         return (new DiscoverService)
             ->discover($latitude, $longitude, $search);
 
@@ -77,12 +77,12 @@ class GeoCodingService implements GeoCodingInterface
     /**
      * @param string $search
      * @param int|null $limit
-     * @return Collection
+     * @return array
      */
     public function autocomplete(
         string $search,
         int $limit = null
-    ): Collection {
+    ): array {
         return (new AutocompleteService)
             ->autocomplete($search, $limit);
 

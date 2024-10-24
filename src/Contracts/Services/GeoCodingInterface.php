@@ -11,33 +11,37 @@ interface GeoCodingInterface
      * @param string|null $street
      * @param string|int|null $houseNumber
      * @param string|null $lang
-     * @return Collection
+     * @return array
      */
     public function geocodeSearch(
         string $city,
         string $street = null,
         string|int $houseNumber = null,
         string $lang = null
-    ): Collection;
+    ): array;
 
     /**
      * @param float|int $latitude
      * @param float|int $longitude
      * @param float|int $radius
-     * @return Collection
+     * @return array
      */
-    public function reverse(float|int $latitude, float|int $longitude, float|int $radius = 10): Collection;
+    public function reverse(float|int $latitude, float|int $longitude, float|int $radius = 10): array;
 
     /**
      * @param float|int $latitude
      * @param float|int $longitude
      * @param string $search
-     * @return Collection
+     * @return array
      */
-    public function discover(float|int $latitude, float|int $longitude, string $search): Collection;
+    public function discover(float|int $latitude, float|int $longitude, string $search): array;
 
 
-
-    public function autocomplete(string $search, int $limit = null): Collection;
+    /**
+     * @param string $search
+     * @param int|null $limit
+     * @return array
+     */
+    public function autocomplete(string $search, int $limit = null): array;
 
 }

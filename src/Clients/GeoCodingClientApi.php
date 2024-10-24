@@ -4,6 +4,7 @@ namespace Plutuss\HerePlatform\Clients;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
+use Plutuss\HerePlatform\Contracts\Response\HasParameterInterface;
 use Plutuss\HerePlatform\Response\GeoCodingResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Plutuss\HerePlatform\Contracts\Response\GeoCodingResponseInterface;
@@ -80,7 +81,7 @@ class GeoCodingClientApi
         return $this;
     }
 
-    public function sendGet(): GeoCodingResponseInterface|HttpException|Collection
+    public function sendGet()
     {
 
         try {
@@ -125,15 +126,28 @@ class GeoCodingClientApi
         return trim(config('here-platform.urls.' . $key));
     }
 
-    private function getResponse(int $status, mixed $data): GeoCodingResponseInterface|HttpException|Collection
+    /**
+     * @param int $status
+     * @param mixed $data
+     * @return array
+     */
+    private function getResponse(int $status, mixed $data): array
     {
         if ($status == 200) {
-            if (count($data['items']) > 0)
-                return collect(value: $data['items'])->map(function ($item): GeoCodingResponseInterface {
-                    return new GeoCodingResponse(collect($item));
-                });
+            if (count($data['items']) > 0) {
 
-            return new GeoCodingResponse(collect([]));
+                foreach ($data['items'] as $key => &$item) {
+                    $data['items'][$key] = new GeoCodingResponse(collect($item));
+                }
+
+//                $responses = collect(value: $data['items'])
+//                    ->map(function ($item): GeoCodingResponseInterface|HasParameterInterface {
+//                        return new GeoCodingResponse(collect($item));
+//                    });
+
+                return $data['items'];
+            }
+            return [];
 
         }
 

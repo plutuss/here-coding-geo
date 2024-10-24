@@ -5,7 +5,6 @@ namespace Plutuss\HerePlatform\Contracts\Response;
 interface GeoCodingResponseInterface
 {
 
-
     /**
      * @param string $path
      * @param mixed $default
