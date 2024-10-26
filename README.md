@@ -24,7 +24,7 @@ HERE_API_KEY=
      
     
     /**
-     * @var GeoCodingResponseInterface[]|HasParameterInterface[] $result
+     * @var GeoCodingResponseInterface[] $result
      */
      
     foreach ($result as $item) {
