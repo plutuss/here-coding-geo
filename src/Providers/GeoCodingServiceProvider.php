@@ -11,7 +11,6 @@ class GeoCodingServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-
         $this->app->singleton(GeoCodingInterface::class, function ($app): GeoCodingInterface {
             return GeoCodingService::getInstance();
         });

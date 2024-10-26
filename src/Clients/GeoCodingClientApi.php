@@ -81,7 +81,10 @@ class GeoCodingClientApi
         return $this;
     }
 
-    public function sendGet()
+    /**
+     * @return mixed
+     */
+    public function sendGet(): mixed
     {
 
         try {
@@ -126,12 +129,13 @@ class GeoCodingClientApi
         return trim(config('here-platform.urls.' . $key));
     }
 
+
     /**
      * @param int $status
      * @param mixed $data
-     * @return array
+     * @return mixed
      */
-    private function getResponse(int $status, mixed $data): array
+    private function getResponse(int $status, mixed $data): mixed
     {
         if ($status == 200) {
             if (count($data['items']) > 0) {
@@ -139,11 +143,6 @@ class GeoCodingClientApi
                 foreach ($data['items'] as $key => &$item) {
                     $data['items'][$key] = new GeoCodingResponse(collect($item));
                 }
-
-//                $responses = collect(value: $data['items'])
-//                    ->map(function ($item): GeoCodingResponseInterface|HasParameterInterface {
-//                        return new GeoCodingResponse(collect($item));
-//                    });
 
                 return $data['items'];
             }
