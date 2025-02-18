@@ -1,8 +1,7 @@
 {
     "name": "plutuss/here-coding-geo",
-    "description": "",
+    "description": "A Laravel package for working with HERE Maps geolocation services, including geocoding, reverse geocoding, and route calculations.",
     "keywords": [
-        "laravel",
         "api",
         "geolocation",
         "geocoding",
@@ -11,7 +10,11 @@
         "coordinates",
         "places",
         "cities",
-        "countries"
+        "countries",
+        "here maps", 
+        "reverse geocoding", 
+        "routing", 
+        "laravel"
     ],
     "minimum-stability": "stable",
     "type": "library",
