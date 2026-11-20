@@ -2,7 +2,6 @@
 
 namespace Plutuss\HerePlatform\Services;
 
-use Illuminate\Support\Collection;
 use Plutuss\HerePlatform\Clients\GeoCodingClientApi;
 
 class ReverseService extends GeoCodingClientApi
@@ -16,11 +15,12 @@ class ReverseService extends GeoCodingClientApi
      */
     public function reverseGeocode(float $latitude, float $longitude, float|int $radius = 10): array
     {
+        $radiusInMeters = (int) ceil($radius);
+
         return $this->setOption(
             array_merge(
                 [
-                    'prox' => $latitude . ',' . $longitude . ',' . $radius,
-                    'mode' => "retrieveAddresses",
+                    'in' => "circle:{$latitude},{$longitude};r={$radiusInMeters}",
                 ],
                 $this->params
             ))

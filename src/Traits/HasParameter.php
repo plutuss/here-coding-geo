@@ -22,9 +22,9 @@ trait HasParameter
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function language(): string
+    public function language(): ?string
     {
         return $this->getNestedValue('language');
     }
@@ -46,89 +46,89 @@ trait HasParameter
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function localityType(): string
+    public function localityType(): ?string
     {
         return $this->getNestedValue('localityType');
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function addressLabel(): string
+    public function addressLabel(): ?string
     {
         return $this->getNestedValue('address.label');
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function addressCountryCode(): string
+    public function addressCountryCode(): ?string
     {
         return $this->getNestedValue('address.countryCode');
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function addressCountryName(): string
+    public function addressCountryName(): ?string
     {
         return $this->getNestedValue('address.countryName');
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function addressStateCode(): string
+    public function addressStateCode(): ?string
     {
         return $this->getNestedValue('address.stateCode');
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function addressState(): string
+    public function addressState(): ?string
     {
         return $this->getNestedValue('address.state');
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function addressCountyCode(): string
+    public function addressCountyCode(): ?string
     {
         return $this->getNestedValue('address.countyCode');
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function addressCounty(): string
+    public function addressCounty(): ?string
     {
         return $this->getNestedValue('address.county');
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function addressCity(): string
+    public function addressCity(): ?string
     {
         return $this->getNestedValue('address.city');
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function addressHouseNumber(): ?int
+    public function addressHouseNumber(): ?string
     {
         return $this->getNestedValue('address.houseNumber');
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function addressPostalCode(): ?int
+    public function addressPostalCode(): ?string
     {
         return $this->getNestedValue('address.postalCode');
     }

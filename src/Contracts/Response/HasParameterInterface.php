@@ -9,33 +9,33 @@ interface HasParameterInterface
 
     public function id(): string;
 
-    public function language(): string;
+    public function language(): ?string;
 
     public function houseNumberType(): ?string;
 
     public function resultType(): string;
 
-    public function localityType(): string;
+    public function localityType(): ?string;
 
-    public function addressLabel(): string;
+    public function addressLabel(): ?string;
 
-    public function addressCountryCode(): string;
+    public function addressCountryCode(): ?string;
 
-    public function addressCountryName(): string;
+    public function addressCountryName(): ?string;
 
-    public function addressStateCode(): string;
+    public function addressStateCode(): ?string;
 
-    public function addressState(): string;
+    public function addressState(): ?string;
 
-    public function addressCountyCode(): string;
+    public function addressCountyCode(): ?string;
 
-    public function addressCounty(): string;
+    public function addressCounty(): ?string;
 
-    public function addressCity(): string;
+    public function addressCity(): ?string;
 
-    public function addressHouseNumber(): ?int;
+    public function addressHouseNumber(): ?string;
 
-    public function addressPostalCode(): ?int;
+    public function addressPostalCode(): ?string;
 
     public function addressStreet(): ?string;
 

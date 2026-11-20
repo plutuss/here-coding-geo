@@ -11,6 +11,8 @@ class GeoCodingServiceProvider extends ServiceProvider
 
     public function register(): void
     {
+        $this->mergeConfigFrom(__DIR__ . '/../config/here-platform.php', 'here-platform');
+
         $this->app->singleton(GeoCodingInterface::class, function ($app): GeoCodingInterface {
             return GeoCodingService::getInstance();
         });

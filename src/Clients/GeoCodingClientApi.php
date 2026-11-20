@@ -2,20 +2,12 @@
 
 namespace Plutuss\HerePlatform\Clients;
 
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
-use Plutuss\HerePlatform\Contracts\Response\HasParameterInterface;
 use Plutuss\HerePlatform\Response\GeoCodingResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Plutuss\HerePlatform\Contracts\Response\GeoCodingResponseInterface;
 
 class GeoCodingClientApi
 {
-
-    /**
-     * @var string
-     */
-    private string $appId;
 
     /**
      * @var string
@@ -55,8 +47,7 @@ class GeoCodingClientApi
 
     private function initConfig(): void
     {
-        $this->appId = config('here-platform.key.app_id');
-        $this->apiKey = config('here-platform.key.api_key');
+        $this->apiKey = (string) config('here-platform.key.api_key', '');
     }
 
     /**
@@ -82,19 +73,14 @@ class GeoCodingClientApi
     }
 
     /**
-     * @return mixed
+     * @return GeoCodingResponse[]
      */
     public function sendGet(): mixed
     {
-
-        try {
-            $response = Http::get($this->url, [
-                ...$this->params,
-                'apiKey' => $this->apiKey
-            ]);
-        } catch (HttpException $exception) {
-            throw new HttpException(500, $exception->getMessage());
-        }
+        $response = Http::get($this->url, array_merge(
+            $this->params,
+            ['apiKey' => $this->apiKey]
+        ));
 
         return $this->getResponse($response->status(), $response->json());
     }
@@ -133,24 +119,32 @@ class GeoCodingClientApi
     /**
      * @param int $status
      * @param mixed $data
-     * @return mixed
+     * @return GeoCodingResponse[]
      */
-    private function getResponse(int $status, mixed $data): mixed
+    private function getResponse(int $status, mixed $data): array
     {
-        if ($status == 200) {
-            if (count($data['items']) > 0) {
+        if ($status !== 200) {
+            $title = is_array($data) ? ($data['title'] ?? null) : null;
+            $message = is_string($title) && trim($title) !== ''
+                ? $title
+                : "HERE API returned HTTP {$status}.";
 
-                foreach ($data['items'] as $key => &$item) {
-                    $data['items'][$key] = new GeoCodingResponse(collect($item));
-                }
-
-                return $data['items'];
-            }
-            return [];
-
+            throw new HttpException($status, $message);
         }
 
-        throw new HttpException($status, $data['title']);
+        $items = is_array($data) ? ($data['items'] ?? null) : null;
+        if (!is_array($items)) {
+            throw new HttpException(502, 'HERE API returned an invalid items list.');
+        }
 
+        foreach ($items as $key => $item) {
+            if (!is_array($item)) {
+                throw new HttpException(502, 'HERE API returned an invalid result item.');
+            }
+
+            $items[$key] = new GeoCodingResponse(collect($item));
+        }
+
+        return $items;
     }
 }
